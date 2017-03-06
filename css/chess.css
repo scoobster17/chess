@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+/* Board */
+.board {
+	background:#ededed;
+	border-collapse:collapse;
+}
+.board th {
+	padding:5px;
+}
+.board thead th {
+	height:25px;
+}
+.board td {
+	background:#fff;
+	border:1px solid #000;
+	color:#000;
+	height:50px;
+	padding:5px;
+	text-align:center;
+	vertical-align:middle;
+	width:50px;
+}
+
+/* Board - White's Move */
+.whiteMove tr:nth-child(2n) td:nth-child(2n),
+.whiteMove tr:nth-child(2n-1) td:nth-child(2n-1) {
+	background:#000;
+	color:#fff;
+}
+
+/* Board - Black's Move */
+.blackMove tr:nth-child(2n-1) td:nth-child(2n),
+.blackMove tr:nth-child(2n) td:nth-child(2n-1) {
+	background:#000;
+	color:#fff;
+}
+
