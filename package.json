@@ -1,0 +1,24 @@
+{
+  "name": "chess",
+  "version": "0.0.0",
+  "description": "Chess game",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc src/js/chess.ts --outDir dist/js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm run build -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobster17/chess.git"
+  },
+  "author": "Phil Gibbins <scoobster17@hotmail.co.uk> (http://www.philgibbins.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scoobster17/chess/issues"
+  },
+  "homepage": "https://github.com/scoobster17/chess#readme",
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
+}
