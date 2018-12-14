@@ -130,11 +130,13 @@ class ChessGame {
   };
 
   placePiece(team, type, row, column) {
-    const tile = document.querySelector(`th[data-row="${ this.mapRow(team, row) }"] ~ td[data-col="${ this.mapColumn(column) }"]`);
+    const tile = document.querySelector(`tr[data-row="${ this.mapRow(team, row) }"] td[data-col="${ this.mapColumn(column) }"]`);
     if (tile) {
       tile.innerHTML = `${ team[0].toUpperCase() }${ team.slice(1) } ${ type[0].toUpperCase() }${ type.slice(1) }`;
-      tile.classList.add(team, type);
+      tile.classList.add(`${team}-piece`, `${type}-type-piece`);
+      tile.setAttribute('data-piece', type);
     }
+    tile.addEventListener('click', this.suggestMoves);
   };
 
   mapRow(team, row) {
@@ -162,4 +164,56 @@ class ChessGame {
     }
     return mapping[column];
   }
+
+  suggestMoves(event) {
+    const currentTile = event.target;
+    const currentTilePosition = `${currentTile.getAttribute('data-col')}${currentTile.parentElement.getAttribute('data-row')}`;
+    let directions: { direction: string, limit?: number }[] = [];
+
+    switch(currentTile.getAttribute('data-piece')) {
+      case 'pawn':
+        directions = [{ direction: 'forward', limit: 2 }];
+        break;
+
+      case 'rook':
+        directions = [{ direction: 'horizontal' }, { direction: 'vertical'}];
+        break;
+
+      // case 'knight':
+      //   directions = [{ direction: 'horizontal' }, { direction: 'vertical'}];
+      //   break;
+
+      case 'bishop':
+        directions = [{ direction: 'diagonal' }];
+        break;
+
+      case 'queen':
+        directions = [
+          { direction: 'diagonal' },
+          { direction: 'horizontal' },
+          { direction: 'vertical' }
+        ];
+        break;
+
+      case 'king':
+        directions = [
+          { direction: 'diagonal', limit: 1 },
+          { direction: 'horizontal', limit: 1 },
+          { direction: 'vertical', limit: 1 }
+        ];
+        break;
+    }
+
+    const validMoves = this.getValidMoves(directions, currentTilePosition);
+
+    // validMoves.forEach((validMove) => { getTile(validMove), then classlist.add('suggested-move') });
+  }
+
+  getValidMoves(directions, currentPosition) {
+    // directions = [ [0, 1], [0, 2] ];
+    // directions = [ [-7, 0], [-6, 0] [1, 0], [0, 1], [0, 2], [0, 3] ];
+    return [];
+  }
+
+  https://stackoverflow.com/questions/12504042/what-is-a-method-that-can-be-used-to-increment-letters
 }
